@@ -188,8 +188,6 @@
         <a href="https://aistudio.google.com/api-keys" target="_blank" class="get-api-key-btn">Get Gemini API Key</a>	
         <label for="apiKey">Gemini API Key</label>
         <input type="password" id="apiKey" placeholder="輸入您的 Gemini API Key">
-        <label for="modelName" style="margin-top: 12px;">Model 名稱</label>
-        <input type="text" id="modelName" placeholder="gemini-2.5-flash" value="gemini-2.5-flash">
     </div>
 
     <script>
@@ -202,7 +200,6 @@
         const status = document.getElementById('status');
         const responseDiv = document.getElementById('response');
         const apiKeyInput = document.getElementById('apiKey');
-        const modelNameInput = document.getElementById('modelName');
 
         let capturedImage = null;
         let lastResponse = '';
@@ -242,10 +239,6 @@
 
         apiKeyInput.addEventListener('input', (e) => {
             apiKey = e.target.value.trim();
-        });
-
-        modelNameInput.addEventListener('input', (e) => {
-            modelName = e.target.value.trim() || 'gemini-2.5-flash';
         });
 
         async function askGemini() {
