@@ -1,9 +1,7 @@
-<!DOCTYPE html>
-<html lang="zh-TW">
-<head>
+<!DOCTYPE html><html lang="zh-TW"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>視覺助理（可視畫面＋大按鈕版）</title>
+    <title>視覺助理（螢幕一半超大按鈕版）</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
@@ -64,25 +62,43 @@
             border: 2px solid #333;
         }
 
-        /* 超大主按鈕：大幅增加高度與字體大小 */
+        /* ⭐ 超級無敵大主按鈕：占畫面高度的一半 ⭐ */
         #mainActionBtn {
             width: 100%;
             max-width: 640px;
             margin: 15px 0;
             background: #22c55e;
             color: #000000;
-            font-size: 2rem; /* 字體放大 */
+            
+            /* 字體再次放大，配合巨大的按鈕 */
+            font-size: clamp(2rem, 5vw + 1rem, 4rem); 
             font-weight: bold;
             border: none;
-            border-radius: 16px; /* 圓角加大 */
+            border-radius: 24px; /* 圓角加大，看起來更協調 */
             cursor: pointer;
-            padding: 40px 20px; /* 上下留白大幅增加，讓按鈕變超高 */
-            box-shadow: 0 8px 16px rgba(34, 197, 94, 0.3); /* 加上陰影增加立體感 */
-            transition: transform 0.1s, background 0.2s; /* 加入點擊時的微小動畫 */
+            
+            /* ⭐ 關鍵修改：占整個畫面高度的一半 ⭐ */
+            height: 50vh; 
+            padding: 0; /* 清除舊的 padding */
+            
+            /* 使用 flex 讓文字在巨大的按鈕中置中 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            line-height: 1.2;
+
+            box-shadow: 0 12px 24px rgba(34, 197, 94, 0.4); /* 陰影加深，更有立體感 */
+            transition: transform 0.1s, background 0.2s;
+            
+            /* 避免按鈕內的文字被意外選取 */
+            -webkit-user-select: none;
+            user-select: none;
         }
+        
         #mainActionBtn:active {
             background: #16a34a;
-            transform: scale(0.98); /* 點擊時稍微縮小，增加手感 */
+            transform: scale(0.98);
         }
         #mainActionBtn:disabled {
             background: #555555;
@@ -108,9 +124,7 @@
         canvas {
             display: none;
         }
-    </style>
-</head>
-<body>
+    </style></head><body>
     <h1>語音視覺助理</h1>
     
     <div class="api-key-container">
@@ -124,7 +138,7 @@
     </div>
 
     <!-- 主按鈕 (移到狀態文字上方，更方便按) -->
-    <button id="mainActionBtn" aria-label="點擊拍攝並用語音描述前方畫面" disabled>
+    <button id="mainActionBtn" aria-label="點擊拍攝並用語音描述前方畫面" disabled="">
         拍攝並描述前方
     </button>
 
@@ -236,6 +250,4 @@
         mainActionBtn.addEventListener('click', captureAndAnalyze);
 
         initWebcam();
-    </script>
-</body>
-</html>
+    </script></body></html>
